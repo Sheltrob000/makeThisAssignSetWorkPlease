@@ -18,9 +18,16 @@ let interval;
 
 function startCounterUp(){
     if (!interval){
-        interval = setInterval(countUp, 10);
+        interval = setInterval(countUp, 100);
     }
 }
+
+function startCounterDown(){
+    if (!interval){
+        interval = setInterval(countDown, 100);
+    }
+}
+
 function countUp(){
     count += 1;
     counter.innerHTML = count;
@@ -36,10 +43,22 @@ function endCounterUp(){
     interval = null;
 }
 
+function endCounterDown(){
+    clearInterval(interval);
+    interval = null;
+}
 
-plusButton.addEventListener("mouseover", startCounterUp);
-plusButton.addEventListener("mouseout", endCounterUp);
+function set0(){
+    count = 0;
+    counter.innerHTML = count;
+}
 
-subButton.addEventListener("mouseover", startCounterUp);
-subButton.addEventListener("mouseout", endCounterUp)
+
+plusButton.addEventListener("mousedown", startCounterUp);
+plusButton.addEventListener("mouseup", endCounterUp);
+
+subButton.addEventListener("mousedown", startCounterDown);
+subButton.addEventListener("mouseup", endCounterDown);
+
+counter.addEventListener("click", set0)
 
